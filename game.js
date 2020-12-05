@@ -7,6 +7,16 @@ var buttonColours = [ "red", "blue", "green", "yellow" ];
 var gamePattern = [];
 var userClickedPattern = [];
 
+var screenSize = screen.width;
+
+init();
+function init() {
+	if (screenSize <= 540) {
+		$("#level-title").html("Press the button.");
+		$('.start-button').css('display', 'inline-block');
+	}
+}
+
 function nextSequence() {
 	var randomNumber = Math.floor(Math.random() * 4);
 
@@ -48,11 +58,26 @@ function animatePress(currentColour) {
 
 $(document).on('keypress', function(e) {
 
-	ifGameStarted = true;
-	if (ifGameStarted) {
-		$("h1").html("Level " + level);
+	if (ifGameStarted == false) {
+		ifGameStarted = true;
+		if (ifGameStarted) {
+			$("h1").html("Level " + level);
+		}
+		nextSequence();
 	}
-	nextSequence();
+
+});
+
+$(".start-Button").click(function() {
+	if (ifGameStarted == false) {
+		ifGameStarted = true;
+		if (ifGameStarted) {
+			$("h1").html("Level " + level);
+		}
+		nextSequence();
+
+		$(".start-Button").css('display', 'none');
+	}
 });
 
 function checkAnswer(userAnswer) {
@@ -84,10 +109,17 @@ function checkAnswer(userAnswer) {
 		console.log("level " + (level - 1) + " crossed.");
 	} else {
 		console.log("level " + (level - 1) + " failed.");
-		$("h1").html("Game Over. Press any key to restart.");
+
+		if (screenSize <= 540) {
+			$("h1").html("Game Over. Click the button to restart.");
+		} else {
+			$("h1").html("Game Over. Press any key to restart.");
+		}
+
 		ifGameStarted = false;
 		gamePattern = [];
 		level = 0;
 		playSound("wrong");
+		$(".start-Button").css('display', 'inline-block');
 	}
 }
