@@ -11,9 +11,11 @@ var screenSize = screen.width;
 
 init();
 function init() {
-	if (screenSize <= 540) {
+	if (screenSize <= 700) {
 		$("#level-title").html("Press the button.");
-		$('.start-button').css('display', 'inline-block');
+		
+	} else {
+		//$('.start-Button').css('display', 'none');
 	}
 }
 
