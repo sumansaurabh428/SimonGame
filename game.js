@@ -92,6 +92,7 @@ function checkAnswer(userAnswer) {
 			} else {
 				// console.log("Fail");
 				isSuccess = false;
+				break;
 			}
 		}
 
